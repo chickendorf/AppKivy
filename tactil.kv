@@ -1,0 +1,73 @@
+#:kivy 1.6.0
+
+<TactilEnv>:
+	workFlow: work_flow
+
+	canvas:
+		Rectangle:
+			source: 'img/app/bg.jpg'
+			size: self.size
+
+	WorkFlow:
+		id: work_flow
+		size: root.size
+
+<WorkFlow>:
+	car: img_carousel
+	selectCategorie: select_categorie
+
+	MyCarousel:
+		id: img_carousel
+		height: 600
+		center_y: root.height / 4 * 3
+		center_x: root.center_x
+	Button:
+		id: select_categorie
+		opacity: 0.5
+		text: str(img_carousel.categories[img_carousel.index]['label'])
+		font_size: 20
+		height: 100
+		width: img_carousel.width
+		center_x: root.center_x
+		center_y: img_carousel.center_y - (img_carousel.center_y / 2) - self.height / 2
+
+<MyCarousel>:
+	direction: 'right'
+	loop: 'true'
+	size: 600,600
+
+<VirtualDesktop>:
+	btnReturn: button_return
+	Button:
+		id: button_return
+		text: 'Retour au choix des catégories'
+		opacity: 0.5
+		width: root.width
+		height: 50
+
+<ButtonInfo>:
+	canvas.after:
+		Rectangle:
+			source: 'img/app/info.png'
+			size: 25,25
+			pos: self.pos
+
+<MyScatter>:
+	img: image
+	scale_max: 2
+	scale_min: 0.5
+	size: image.size
+
+	Image:
+		id: image
+		source: root.source
+		size: 400,400 / self.image_ratio
+		canvas.before:
+			BorderImage:
+				source: 'img/app/shadow32.png'
+				border: (30,30,30,30)
+				size: root.width + 60, root.height + 60
+				pos: (-30,-30)
+		ButtonInfo:
+			descriptionImg: root.description
+			pos: 10,root.height - 35

@@ -1,0 +1,3 @@
+title=<Exposition CJB>
+author=<Maulini>
+orientation=<landscape>
